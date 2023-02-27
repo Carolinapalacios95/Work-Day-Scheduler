@@ -5,21 +5,35 @@
 // List Global Variables
 // Referencing day.js
 
-
+// made a var that references the whole task (time and textarea)
 var containerEl = document.querySelector('.container');
 
 
 
 $(function () {
   var today = dayjs();
-  $('#currentDay').text(today.format('MMMM D, YYYY h:mm'));
+  // Displays the current date and time in p tag with ID of "currentDay"
+  $('#currentDay').text(today.format('MMMM D, YYYY h:mm a'));
+
+  // added event listener for saveBtn class within each time div
+  $('.saveBtn').on('click', function () {
+    // made new var that references the input from the sibling html description attribute
+    var textInput = $(this).siblings('.description').val();
+    // made new var that references the parent html id attribute
+    var timeKey = $(this).parent().attr("id");
+
+    //sets items to store in local storage
+    localStorage.setItem(timeKey, textInput)
+  })
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  //
+
+  
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
